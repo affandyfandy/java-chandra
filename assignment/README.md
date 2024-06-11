@@ -4,7 +4,7 @@
 <br>
 [Assignment 2](src/assignment2.md)
 <br>
-[Assignment 3](src/assignment3.md)
+[Assignment 3](src/assignment3.java)
 <br>
-[Assignment 4](src/assignment4.md)
+[Assignment 4](src/assignment4.java)
 
