@@ -20,6 +20,7 @@ public class assignment3 {
                 index.add(i);
             }
         }
+        // DD
         // int biggestArr = arr[0];
         // int secBiggest = arr[0];
 
