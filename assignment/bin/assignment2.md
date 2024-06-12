@@ -10,6 +10,10 @@ Encapsulation is one of the concept that to operate a data into a single unit by
 public class Ninja {
     private String name;
 
+    public Ninja(name){
+        this.name = name;
+    }
+
     public String getname() {
         return name;
     }
@@ -32,6 +36,10 @@ Inheritance is one of the most used technique to inherit all the behaviour that 
 public class NinjaEquip extends Ninja {
     private String Weapon;
 
+    public NinjaEquip(Weapon){
+        this.Weapon = weapon;
+    }
+
     public String getWeapon() {
         return Weapon;
     }
@@ -43,7 +51,6 @@ public class NinjaEquip extends Ninja {
     public void Display(){
        System.out.println(Ninja.name);
        System.out.println(getWeapon());
-
     }
 }
 ```
@@ -52,42 +59,60 @@ public class NinjaEquip extends Ninja {
 
 Polymorphism allows objects of different types to be treated as objects of a common superclass. In Java, you can achieve polymorphism through method overriding and method overloading.
 
+- **Method Overriding**: When a subclass provides a specific implementation for a method already defined in its superclass. The overridden method in the subclass should have the same name, return type, and parameters as in the superclass.
+- **Method Overriding**: When a subclass provides a specific implementation for a method already defined in its superclass. The overridden method in the subclass should have the same name, return type, and parameters as in the superclass.
+  Method Overloading: When multiple methods in the same class have the same name but different parameters (number, type, or both).
+
 ```java
 public class Ninja {
     private String name;
 
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String attack(){
-        return "Attack another Player"
+    public String attack() {
+        return "Attack another player";
     }
 }
 
 public class NinjaEquip extends Ninja {
-    private String Weapon;
+    private String weapon;
+    private Ninja target
+
+
+    public NinjaEquip(String name, String weapon) {
+        super.setName(name);
+        this.weapon = weapon;
+    }
 
     public String getWeapon() {
-        return Weapon;
+        return weapon;
     }
 
-    public void setWeapon(String name) {
-        this.Weapon = Weapon;
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
     }
 
-    public String attack(){
-        return "Attack another Player with" + this.getWeapon();
+    @Override
+    public String attack() {
+        return "Attack another player with " + this.getWeapon();
     }
-    public void Display(){
-       System.out.println(Ninja.name);
-       System.out.println(getWeapon());
+
+    public void display() {
+        System.out.println(getName());
+        System.out.println(getWeapon());
+    }
+
+    public String attack(String target) {
+        return "Attack " + target.getName() + " with " + this.getWeapon();
     }
 }
+
 ```
 
 #### Abstraction
