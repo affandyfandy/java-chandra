@@ -24,7 +24,6 @@ For try-with-resources, if an exception is thrown in a try block and in a try-wi
 **Case 1: Single resource**
 
 ```java
-// Importing all input output classes
 import java.io.*;
 
 // Class
@@ -33,36 +32,22 @@ class GFG {
     // Main driver method
     public static void main(String[] args)
     {
-        // Try block to check for exceptions
         try (
-
-            // Creating an object of FileOutputStream
-            // to write stream or raw data
-
-            // Adding resource
             FileOutputStream fos
             = new FileOutputStream("gfgtextfile.txt")) {
 
-            // Custom string input
             String text
                 = "Hello World. This is my java program";
 
-            // Converting string to bytes
             byte arr[] = text.getBytes();
 
-            // Text written in the file
             fos.write(arr);
         }
 
-        // Catch block to handle exceptions
         catch (Exception e) {
-
-            // Display message for the occurred exception
             System.out.println(e);
         }
 
-        // Display message for successful execution of
-        // program
         System.out.println(
             "Resource are closed and message has been written into the gfgtextfile.txt");
     }
@@ -72,64 +57,36 @@ class GFG {
 **Case 2: Multiple resources**
 
 ```java
-// Importing all input output classes
 import java.io.*;
 
 // Class
 class GFG {
 
-    // Main driver method
     public static void main(String[] args)
     {
-        // Try block to check for exceptions
 
-        // Writing data to a file using FileOutputStream
-        // by passing input file as a parameter
         try (FileOutputStream fos
              = new FileOutputStream("outputfile.txt");
-
-             // Adding resource
-
-             // Reading the stream of character from
              BufferedReader br = new BufferedReader(
                  new FileReader("gfgtextfile.txt"))) {
 
-            // Declaring a string holding the
-            // stream content of the file
             String text;
 
-            // Condition check using readLine() method
-            // which holds true till there is content
-            // in the input file
             while ((text = br.readLine()) != null) {
 
-                // Reading from input file passed above
-                // using getBytes() method
                 byte arr[] = text.getBytes();
 
-                // String converted to bytes
                 fos.write(arr);
-
-                // Copying the content of passed input file
-                // 'inputgfgtext' file to outputfile.txt
             }
 
-            // Display message when
-            // file is successfully copied
             System.out.println(
                 "File content copied to another one.");
         }
 
-        // Catch block to handle generic exceptions
         catch (Exception e) {
-
-            // Display the exception on the
-            // console window
             System.out.println(e);
         }
 
-        // Display message for successful execution of the
-        // program
         System.out.println(
             "Resource are closed and message has been written into the gfgtextfile.txt");
     }

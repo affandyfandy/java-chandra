@@ -8,7 +8,15 @@ class NoVowelException extends Exception {
 
 public class Assignment3E {
     public static void checkForVowels(String input) throws NoVowelException {
-        if (!input.matches(".*[aeiouAEIOU].*")) {
+        boolean hasVowel = false;
+        for (int i = 0; i < input.length(); i++) {
+            char temp = Character.toLowerCase(input.charAt(i));
+            if (temp == 'a' || temp == 'e' || temp == 'i' || temp == 'o' || temp == 'u') {
+                hasVowel = true;
+                break;
+            }
+        }
+        if (!hasVowel) {
             throw new NoVowelException("The input string does not contain any vowels.");
         }
     }
@@ -21,7 +29,7 @@ public class Assignment3E {
 
         try {
             checkForVowels(userInput);
-            System.out.println("The input string contains at least one vowel.");
+            System.out.println("The input string contain vowel.");
         } catch (NoVowelException e) {
             System.err.println(e.getMessage());
         } finally {
