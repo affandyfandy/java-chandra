@@ -324,3 +324,103 @@ After doing bank account cases, and sorting an array using multiple threads, the
 - **Heavy CPU Tasks:** Use multithreading for CPU-bound tasks. For instance, when you want to perform heavy operations without blocking the program flow, multithreading allows you to achieve this. UIs often use background threads for heavy processing while keeping the UI responsive1.
 
 ## ReadWriteLock for Read/Write access to Share
+
+ReadWriteLock is an interface. ReadWriteLock is implemented by ReentrantReadWriteLock Class which is in java.util.concurrent.locks package. So, to use a ReadWriteLock we have to use ReentrantReadWriteLock.
+
+A java.util.concurrent.locks.ReadWriteLock is a high-level thread lock tool. It allows various threads to read a specific resource but allows only one to write it, at a time.
+
+The approach is, that multiple threads can read from a shared resource without causing concurrency errors. The concurrency errors first occur when writes and reads to a shared resource occur simultaneously, or if multiple writes take place simultaneously.
+
+**Rules**
+Read lock and Write lock which allows a thread to lock the ReadWriteLock either for reading or writing.
+
+- Read lock: If there is no thread that has requested the write lock and the lock for writing, then multiple threads can lock the lock for reading. It means multiple threads can read the data at the very moment, as long as there’s no thread to write the data or to update the data.
+- Write Lock: If no threads are writing or reading, only one thread at a moment can lock the lock for writing. Other threads have to wait until the lock gets released. It means, only one thread can write the data at the very moment, and other threads have to wait.
+
+Methods: There are two methods that ReadWritelock provides:
+
+- Lock readLock()
+- Lock writeLock()
+
+here is the example of using lockandWrite
+
+```java
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+public class Assignment4E {
+    private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    private final Lock readLock = readWriteLock.readLock();
+    private final Lock writeLock = readWriteLock.writeLock();
+    private final StringBuilder sharedResource = new StringBuilder();
+
+    // Method to read data from the shared resource
+    public void readResource() {
+        readLock.lock();
+        try {
+            // Simulating reading data from the shared resource
+            System.out.println("Reading data: " + sharedResource.toString());
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    // Method to write data to the shared resource
+    public void writeResource(String data) {
+        writeLock.lock();
+        try {
+            // Simulating writing data to the shared resource
+            sharedResource.append(data);
+            System.out.println("Written data: " + data);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public static void main(String[] args) {
+        Example example = new Example();
+
+        // Create writer thread
+        Thread writerThread = new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                example.writeResource("Data" + i + " ");
+                try {
+                    Thread.sleep(100); // Simulating some delay
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        // Create reader threads
+        Runnable readTask = () -> {
+            for (int i = 0; i < 5; i++) {
+                example.readResource();
+                try {
+                    Thread.sleep(50); // Simulating some delay
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        };
+
+        Thread readerThread1 = new Thread(readTask, "Reader1");
+        Thread readerThread2 = new Thread(readTask, "Reader2");
+
+        // Start the writer and reader threads
+        writerThread.start();
+        readerThread1.start();
+        readerThread2.start();
+
+        // Wait for all threads to finish
+        try {
+            writerThread.join();
+            readerThread1.join();
+            readerThread2.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+```
