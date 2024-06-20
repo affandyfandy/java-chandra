@@ -42,7 +42,7 @@ public class Assignment5E {
 
         // Step 3: Convert List to Map with employeeID as key
         Map<Integer, Employee> employeeMap = employees.stream()
-                .collect(Collectors.toMap(Employee::getEmployeeID,  -> emp));
+                .collect(Collectors.toMap(Employee::getEmployeeID, emp -> emp));
 
         // Step 4: Sort the Map by keys in ascending order using a LinkedHashMap
         Map<Integer, Employee> sortedEmployeeMap = new LinkedHashMap<>();
