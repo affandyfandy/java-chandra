@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Assignment5C {
     public static void main(String[] args) {
-        // Replace these with your actual input and output file paths
+
         String inputFile = "input.csv";
         String outputFile = "output.csv";
 
