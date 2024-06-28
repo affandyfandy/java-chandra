@@ -1,103 +1,109 @@
 CREATE DATABASE IF NOT EXISTS fptLectureSQL;
 
 USE fptLectureSQL;
--- drop table customer;
--- drop table cashier;
--- drop table product;
--- drop table invoice;
--- drop table invoiceDetail;
-CREATE TABLE IF NOT EXISTS customer (
-    id VARCHAR(255) NOT NULL,
+DROP TABLE IF EXISTS invoiceDetail, invoice, product, cashier, customer, revenue_report;
+CREATE TABLE customer (
+    id INT AUTO_INCREMENT,
     name VARCHAR(255),
     phone VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS cashier (
-    id VARCHAR(255) NOT NULL,
+CREATE TABLE cashier (
+    id INT AUTO_INCREMENT,
     name VARCHAR(255),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS product (
-    id VARCHAR(255) NOT NULL,
+CREATE TABLE product (
+    id INT AUTO_INCREMENT,
     name VARCHAR(255),
     price BIGINT,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS invoice (
-    id VARCHAR(255) NOT NULL,
-    customerId VARCHAR(255) NOT NULL,
-    cashierId VARCHAR(255) NOT NULL,
-    amount INTEGER,
+CREATE TABLE invoice (
+    id INT AUTO_INCREMENT,
+    customerId INT NOT NULL,
+    cashierId INT NOT NULL,
+    amount BIGINT,
     created_date DATETIME,
     PRIMARY KEY (id),
     FOREIGN KEY (customerId) REFERENCES customer(id),
     FOREIGN KEY (cashierId) REFERENCES cashier(id)
 );
 
-CREATE TABLE IF NOT EXISTS invoiceDetail (
-    id VARCHAR(255) NOT NULL,
-    invoiceId VARCHAR(255) NOT NULL,
-    productId VARCHAR(255) NOT NULL,
+CREATE TABLE invoiceDetail (
+    id INT AUTO_INCREMENT,
+    invoiceId INT NOT NULL,
+    productId INT NOT NULL,
     productPrice BIGINT,
-    amount INTEGER,
-    quantity INTEGER,
+    quantity INT,
+    amount BIGINT,
     PRIMARY KEY (id),
     FOREIGN KEY (invoiceId) REFERENCES invoice(id),
     FOREIGN KEY (productId) REFERENCES product(id)
 );
 
-INSERT INTO customer (id, name, phone) VALUES
-('C001', 'Dodo', '123-456-7890'),
-('C002', 'Rindalamn', '987-654-3210'),
-('C003', 'Ryan', '555-123-4567'),
-('C004', 'Chandra', '111-222-3333'),
-('C005', 'Hadi', '444-555-6666');
+CREATE TABLE revenue_report(
+    id INT AUTO_INCREMENT,
+    amount BIGINT,
+    year INT NOT NULL,
+    month INT DEFAULT NULL,
+    day INT DEFAULT NULL,
+    PRIMARY KEY (id)
+);
 
-INSERT INTO cashier (id, name) VALUES
-('CA001', 'Grace'),
-('CA002', 'Hank');
+INSERT INTO customer (name, phone) VALUES
+('Dodo', '123-456-7890'),
+('Rindalamn', '987-654-3210'),
+('Ryan', '555-123-4567'),
+('Chandra', '111-222-3333'),
+('Hadi', '444-555-6666');
 
-INSERT INTO product (id, name, price) VALUES
-('P001', 'Laptop', 1000000),
-('P002', 'Mouse', 20000),
-('P003', 'Keyboard', 50000),
-('P004', 'Monitor', 150000),
-('P005', 'Printer', 300000);
+INSERT INTO cashier (name) VALUES
+('Grace'),
+('Hank');
 
-INSERT INTO invoice (id, customerId, cashierId, amount, created_date) VALUES
-('I001', 'C001', 'CA001', 1020000, '2024-06-01 10:00:00'),
-('I002', 'C002', 'CA002', 45000, '2024-06-02 11:30:00'),
-('I003', 'C003', 'CA001', 1050000, '2024-06-03 14:20:00'),
-('I004', 'C004', 'CA002', 1000000, '2024-06-04 09:00:00'),
-('I005', 'C005', 'CA001', 320000, '2024-05-01 10:00:00'),
-('I006', 'C001', 'CA002', 170000, '2024-05-02 11:30:00'),
-('I007', 'C002', 'CA001', 1070000, '2024-05-03 14:20:00'),
-('I008', 'C003', 'CA002', 1150000, '2024-04-01 09:00:00'),
-('I009', 'C004', 'CA001', 350000, '2023-12-01 10:00:00'),
-('I010', 'C005', 'CA002', 520000, '2023-11-02 11:30:00');
+INSERT INTO product (name, price) VALUES
+('Laptop', 1000000),
+('Mouse', 20000),
+('Keyboard', 50000),
+('Monitor', 150000),
+('Printer', 300000);
 
-INSERT INTO invoiceDetail (id, invoiceId, productId, productPrice, amount, quantity) VALUES
-('ID001', 'I001', 'P001', 1000000, 1000000, 1),
-('ID002', 'I001', 'P002', 20000, 20000, 1),
-('ID003', 'I002', 'P003', 45000, 45000, 1),
-('ID004', 'I003', 'P004', 150000, 150000, 1),
-('ID005', 'I003', 'P001', 1000000, 1000000, 1),
-('ID006', 'I004', 'P001', 1000000, 1000000, 1),
-('ID007', 'I005', 'P005', 300000, 300000, 1),
-('ID008', 'I005', 'P002', 20000, 20000, 1),
-('ID009', 'I006', 'P003', 50000, 50000, 1),
-('ID010', 'I006', 'P004', 120000, 120000, 1),
-('ID011', 'I007', 'P001', 1000000, 1000000, 1),
-('ID012', 'I007', 'P003', 70000, 70000, 1),
-('ID013', 'I008', 'P001', 1000000, 1000000, 1),
-('ID014', 'I008', 'P005', 150000, 150000, 1),
-('ID015', 'I009', 'P002', 20000, 20000, 1),
-('ID016', 'I009', 'P003', 50000, 50000, 1),
-('ID017', 'I010', 'P005', 300000, 300000, 1),
-('ID018', 'I010', 'P004', 220000, 220000, 1);
+INSERT INTO invoice (customerId, cashierId, amount, created_date) VALUES
+(1, 1, 1020000, '2024-06-01 10:00:00'),
+(2, 2, 45000, '2024-06-02 11:30:00'),
+(3, 1, 1050000, '2024-06-03 14:20:00'),
+(4, 2, 1000000, '2024-06-04 09:00:00'),
+(5, 1, 320000, '2024-05-01 10:00:00'),
+(1, 2, 170000, '2024-05-02 11:30:00'),
+(2, 1, 1070000, '2024-05-03 14:20:00'),
+(3, 2, 1150000, '2024-04-01 09:00:00'),
+(4, 1, 350000, '2023-12-01 10:00:00'),
+(5, 2, 520000, '2023-11-02 11:30:00');
+
+INSERT INTO invoiceDetail (invoiceId, productId, productPrice, quantity, amount) VALUES
+(1, 1, 1000000, 1, 1000000),
+(1, 2, 20000, 1, 20000),
+(2, 3, 45000, 1, 45000),
+(3, 4, 150000, 1, 150000),
+(3, 1, 1000000, 1, 1000000),
+(4, 1, 1000000, 1, 1000000),
+(5, 5, 300000, 1, 300000),
+(5, 2, 20000, 1, 20000),
+(6, 3, 50000, 1, 50000),
+(6, 4, 120000, 1, 120000),
+(7, 1, 1000000, 1, 1000000),
+(7, 3, 70000, 1, 70000),
+(8, 1, 1000000, 1, 1000000),
+(8, 5, 150000, 1, 150000),
+(9, 2, 20000, 1, 20000),
+(9, 3, 50000, 1, 50000),
+(10, 5, 300000, 1, 300000),
+(10, 4, 220000, 1, 220000);
+
 
 
 select * from product;
@@ -142,12 +148,86 @@ JOIN
 SELECT * FROM customer_purchases;
 
 -- Function Revenue
-SELECT 
-    c.name AS cashierName, 
-    sum(i.amount) AS totalAmount
-FROM cashier c
-Join invoice i ON c.id = i.cashierId
-GROUP BY cashierName;
+DELIMITER $$
+
+CREATE PROCEDURE revenueByCashier(IN cashier_id INT)
+BEGIN
+    SELECT SUM(amount) AS revenue
+    FROM invoice
+    WHERE cashierId = cashier_id;
+END$$
+
+DELIMITER ;
+
+CALL revenueByCashier(1);
+CALL revenueByCashier(2);
+
+-- Create a function to store revenue by year, 
+DROP PROCEDURE IF EXISTS revenueByYear;
+
+DELIMITER $$
+CREATE PROCEDURE revenueByYear(IN year INT)
+BEGIN
+	DECLARE revenue BIGINT;
+    SELECT SUM(amount) INTO revenue
+    FROM invoice
+    WHERE year = YEAR(created_date);
+    
+    INSERT INTO revenue_report(amount, year)
+    VALUES (revenue, year);
+END$$
+DELIMITER ;
+
+CALL revenueByYear(2024);
+CALL revenueByYear(2023);
+
+SELECT * FROM revenue_report;
+
+-- Create a function to store revenue by month,
+DROP PROCEDURE IF EXISTS revenueByMonth;
+
+DELIMITER $$
+CREATE PROCEDURE revenueByMonth(IN month INT, year INT)
+BEGIN
+	DECLARE revenue BIGINT;
+    SELECT SUM(amount) INTO revenue
+    FROM invoice
+    WHERE (month = MONTH(created_date)) AND (year = YEAR(created_date));
+	
+	INSERT INTO revenue_report(amount, year, month)
+    VALUES (revenue, year, month);
+END$$
+DELIMITER ;
+
+CALL revenueByMonth(5, 2024);
+CALL revenueByMonth(6, 2024);
+CALL revenueByMonth(11, 2023);
+    
+SELECT * FROM revenue_report;
+
+-- Create a function to store revenue by day,
+DROP PROCEDURE IF EXISTS revenueByDay; 
+
+DELIMITER $$
+CREATE PROCEDURE revenueByDay(IN date DATE)
+BEGIN
+	DECLARE revenue BIGINT;
+    SELECT SUM(amount) INTO revenue
+    FROM invoice
+    WHERE date = DATE(created_date);
+    
+	INSERT INTO revenue_report(amount, year, month, day)
+    VALUES (revenue, YEAR(date), MONTH(date), DAY(date));
+END$$
+DELIMITER ;
+
+CALL revenueByDay('2024-06-01');
+CALL revenueByDay('2024-06-02');
+CALL revenueByDay('2024-06-03');
+CALL revenueByDay('2024-06-04');
+
+SELECT * FROM revenue_report;
+
 
 
 

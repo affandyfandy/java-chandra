@@ -48,10 +48,10 @@ By normalizing the original Orders table into three separate tables (Customers, 
 
     ```sql
     CREATE TABLE IF NOT EXISTS customer (
-        id VARCHAR(255) NOT NULL,
-        name VARCHAR(255),
-        phone VARCHAR(255),
-        PRIMARY KEY (id)
+    id INT AUTO_INCREMENT,
+    name VARCHAR(255),
+    phone VARCHAR(255),
+    PRIMARY KEY (id)
     );
     ```
 
@@ -61,7 +61,7 @@ By normalizing the original Orders table into three separate tables (Customers, 
 
     ```sql
     CREATE TABLE IF NOT EXISTS cashier (
-        id VARCHAR(255) NOT NULL,
+        id INT AUTO_INCREMENT,
         name VARCHAR(255),
         PRIMARY KEY (id)
     );
@@ -73,7 +73,7 @@ By normalizing the original Orders table into three separate tables (Customers, 
 
     ```sql
     CREATE TABLE IF NOT EXISTS product (
-        id VARCHAR(255) NOT NULL,
+        id INT AUTO_INCREMENT,
         name VARCHAR(255),
         price BIGINT,
         PRIMARY KEY (id)
@@ -86,10 +86,10 @@ By normalizing the original Orders table into three separate tables (Customers, 
 
     ```sql
     CREATE TABLE IF NOT EXISTS invoice (
-        id VARCHAR(255) NOT NULL,
-        customerId VARCHAR(255) NOT NULL,
-        cashierId VARCHAR(255) NOT NULL,
-        amount INTEGER,
+        id INT AUTO_INCREMENT,
+        customerId INT NOT NULL,
+        cashierId INT NOT NULL,
+        amount BIGINT,
         created_date DATETIME,
         PRIMARY KEY (id),
         FOREIGN KEY (customerId) REFERENCES customer(id),
@@ -102,17 +102,17 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Invoice Detail Table: Stores details of each invoice item with unique id, references to invoiceId and productId, the productPrice, amount, and quantity.
 
     ```sql
-        CREATE TABLE IF NOT EXISTS invoiceDetail (
-            id VARCHAR(255) NOT NULL,
-            invoiceId VARCHAR(255) NOT NULL,
-            productId VARCHAR(255) NOT NULL,
-            productPrice BIGINT,
-            amount INTEGER,
-            quantity INTEGER,
-            PRIMARY KEY (id),
-            FOREIGN KEY (invoiceId) REFERENCES invoice(id),
-            FOREIGN KEY (productId) REFERENCES product(id)
-        );
+    CREATE TABLE IF NOT EXISTS invoiceDetail (
+        id INT AUTO_INCREMENT,
+        invoiceId INT NOT NULL,
+        productId INT NOT NULL,
+        productPrice BIGINT,
+        quantity INT,
+        amount BIGINT,
+        PRIMARY KEY (id),
+        FOREIGN KEY (invoiceId) REFERENCES invoice(id),
+        FOREIGN KEY (productId) REFERENCES product(id)
+    );
     ```
 
   <br>
@@ -122,12 +122,12 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Customer Table: Inserted 5 customers.
 
     ```sql
-    INSERT INTO customer (id, name, phone) VALUES
-    ('C001', 'Dodo', '123-456-7890'),
-    ('C002', 'Rindalamn', '987-654-3210'),
-    ('C003', 'Ryan', '555-123-4567'),
-    ('C004', 'Chandra', '111-222-3333'),
-    ('C005', 'Hadi', '444-555-6666');
+    INSERT INTO customer (name, phone) VALUES
+    ('Dodo', '123-456-7890'),
+    ('Rindalamn', '987-654-3210'),
+    ('Ryan', '555-123-4567'),
+    ('Chandra', '111-222-3333'),
+    ('Hadi', '444-555-6666');
     ```
 
     <br>
@@ -135,9 +135,9 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Cashier Table: Inserted 2 cashiers.
 
     ```sql
-    INSERT INTO cashier (id, name) VALUES
-    ('CA001', 'Grace'),
-    ('CA002', 'Hank');
+    INSERT INTO cashier (name) VALUES
+    ('Grace'),
+    ('Hank');
     ```
 
     <br>
@@ -145,12 +145,12 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Product Table: Inserted 5 products.
 
     ```sql
-    INSERT INTO product (id, name, price) VALUES
-    ('P001', 'Laptop', 1000000),
-    ('P002', 'Mouse', 20000),
-    ('P003', 'Keyboard', 50000),
-    ('P004', 'Monitor', 150000),
-    ('P005', 'Printer', 300000);
+    INSERT INTO product (name, price) VALUES
+    ('Laptop', 1000000),
+    ('Mouse', 20000),
+    ('Keyboard', 50000),
+    ('Monitor', 150000),
+    ('Printer', 300000);
     ```
 
     <br>
@@ -158,17 +158,17 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Invoice Table: Inserted 10 invoices with varying dates and amounts.
 
     ```sql
-    INSERT INTO invoice (id, customerId, cashierId, amount, created_date) VALUES
-    ('I001', 'C001', 'CA001', 1020000, '2024-06-01 10:00:00'),
-    ('I002', 'C002', 'CA002', 45000, '2024-06-02 11:30:00'),
-    ('I003', 'C003', 'CA001', 1050000, '2024-06-03 14:20:00'),
-    ('I004', 'C004', 'CA002', 1000000, '2024-06-04 09:00:00'),
-    ('I005', 'C005', 'CA001', 320000, '2024-05-01 10:00:00'),
-    ('I006', 'C001', 'CA002', 170000, '2024-05-02 11:30:00'),
-    ('I007', 'C002', 'CA001', 1070000, '2024-05-03 14:20:00'),
-    ('I008', 'C003', 'CA002', 1150000, '2024-04-01 09:00:00'),
-    ('I009', 'C004', 'CA001', 350000, '2023-12-01 10:00:00'),
-    ('I010', 'C005', 'CA002', 520000, '2023-11-02 11:30:00');
+    INSERT INTO invoice (customerId, cashierId, amount, created_date) VALUES
+    (1, 1, 1020000, '2024-06-01 10:00:00'),
+    (2, 2, 45000, '2024-06-02 11:30:00'),
+    (3, 1, 1050000, '2024-06-03 14:20:00'),
+    (4, 2, 1000000, '2024-06-04 09:00:00'),
+    (5, 1, 320000, '2024-05-01 10:00:00'),
+    (1, 2, 170000, '2024-05-02 11:30:00'),
+    (2, 1, 1070000, '2024-05-03 14:20:00'),
+    (3, 2, 1150000, '2024-04-01 09:00:00'),
+    (4, 1, 350000, '2023-12-01 10:00:00'),
+    (5, 2, 520000, '2023-11-02 11:30:00');
     ```
 
     <br>
@@ -176,25 +176,25 @@ By normalizing the original Orders table into three separate tables (Customers, 
   - Invoice Detail Table: Inserted 18 invoice details, each linking invoices to specific products with quantities and prices.
 
     ```sql
-      INSERT INTO invoiceDetail (id, invoiceId, productId, productPrice, amount, quantity) VALUES
-      ('ID001', 'I001', 'P001', 1000000, 1000000, 1),
-      ('ID002', 'I001', 'P002', 20000, 20000, 1),
-      ('ID003', 'I002', 'P003', 45000, 45000, 1),
-      ('ID004', 'I003', 'P004', 150000, 150000, 1),
-      ('ID005', 'I003', 'P001', 1000000, 1000000, 1),
-      ('ID006', 'I004', 'P001', 1000000, 1000000, 1),
-      ('ID007', 'I005', 'P005', 300000, 300000, 1),
-      ('ID008', 'I005', 'P002', 20000, 20000, 1),
-      ('ID009', 'I006', 'P003', 50000, 50000, 1),
-      ('ID010', 'I006', 'P004', 120000, 120000, 1),
-      ('ID011', 'I007', 'P001', 1000000, 1000000, 1),
-      ('ID012', 'I007', 'P003', 70000, 70000, 1),
-      ('ID013', 'I008', 'P001', 1000000, 1000000, 1),
-      ('ID014', 'I008', 'P005', 150000, 150000, 1),
-      ('ID015', 'I009', 'P002', 20000, 20000, 1),
-      ('ID016', 'I009', 'P003', 50000, 50000, 1),
-      ('ID017', 'I010', 'P005', 300000, 300000, 1),
-      ('ID018', 'I010', 'P004', 220000, 220000, 1);
+    INSERT INTO invoiceDetail (invoiceId, productId, productPrice, quantity, amount) VALUES
+    (1, 1, 1000000, 1, 1000000),
+    (1, 2, 20000, 1, 20000),
+    (2, 3, 45000, 1, 45000),
+    (3, 4, 150000, 1, 150000),
+    (3, 1, 1000000, 1, 1000000),
+    (4, 1, 1000000, 1, 1000000),
+    (5, 5, 300000, 1, 300000),
+    (5, 2, 20000, 1, 20000),
+    (6, 3, 50000, 1, 50000),
+    (6, 4, 120000, 1, 120000),
+    (7, 1, 1000000, 1, 1000000),
+    (7, 3, 70000, 1, 70000),
+    (8, 1, 1000000, 1, 1000000),
+    (8, 5, 150000, 1, 150000),
+    (9, 2, 20000, 1, 20000),
+    (9, 3, 50000, 1, 50000),
+    (10, 5, 300000, 1, 300000),
+    (10, 4, 220000, 1, 220000);
     ```
 
     <br>
@@ -349,37 +349,141 @@ SELECT * FROM customer_purchases;
 
 ![Alt text](img/2.4.png)
 
-# Function to Show Revenue by Cashier
+# Function to Show Revenue by Cashier ID
+
+A Stored Function is a set of SQL statements that perform a specific operation and then return a single value. Similar to built-in functions in MySQL, a stored function can be called from within any MySQL statement. The MySQL CREATE FUNCTION statement is used to create both stored functions and user-defined functions.
+
+Here is given task to create function to show revenue by cashier id and below is the query.
 
 ```sql
-SELECT
-    c.name AS cashierName,
-    sum(i.amount) AS totalAmount
-FROM cashier c
-Join invoice i ON c.id = i.cashierId
-GROUP BY cashierName;
+DELIMITER $$
+
+CREATE PROCEDURE revenueByCashier(IN cashier_id INT)
+BEGIN
+    SELECT SUM(amount) AS revenue
+    FROM invoice
+    WHERE cashierId = cashier_id;
+END$$
+
+DELIMITER ;
+
+CALL revenueByCashier(1);
+CALL revenueByCashier(2);
 ```
 
-On this case we need two tables to show sum of the amount by their cashier (Table Cashier and Table Invoice).
+- Query above will `SELECT SUM(amount)` AS revenue: This is calculates the sum of the amount column for `invoices` associated with the given `cashier_id` and returns the result directly as revenue.
+- FROM invoice WHERE cashierId = cashier_id: This part filters the rows from the invoice table to include only those where the `cashierId` matches the input parameter `cashier_id`.
 
 <br>
 
+## Create table Revenue Report
+
+Create a table that contain id, year, month, day, and amount. Here is the query to create the table `revenue_report`,
+
 ```sql
-SELECT
-    c.name AS cashierName,
-    sum(i.amount) AS totalAmount
-FROM cashier c
+CREATE TABLE revenue_report(
+    id INT AUTO_INCREMENT,
+    amount BIGINT,
+    year INT NOT NULL,
+    month INT DEFAULT NULL,
+    day INT DEFAULT NULL,
+    PRIMARY KEY (id)
+);
 ```
 
-- On that query we select the cashierName from cashier table and sum of the amount by cashier from invoice table.
+On `revenue_report` we use year, month, and day as an INT where there will be a procedure to take as the parameters that will output for the amount of the revenue based on per day, month, or year. The difference is the year cannot be `NULL` since the year will be used not only in annual, but also in monthly and daily. Thus the year set to be `NOT NULL` whereas the month and day can be `NULL`.
 
 <br>
 
-```sql
-Join invoice i ON c.id = i.cashierId
-GROUP BY cashierName;
-```
+## Create Store Procedures to Calculate Revenue
 
-- After we select all the columns we need, we have use join clause by joining invoice table and cashier table by joining from `id` from cashier and `cashierId` from invoice. After that we group the result by `cashierName`. Here is the result of that query.
+In this task we need to make three procedures to calculate revenue based on daily, monthy, ana annual.
 
-  ![Alt text](img/2.5.png)
+- On annual there will be a year in `INT` value as `in parameter` in the procedure.
+
+  Here is the implementations of annual procedure,
+
+  ### Annual
+
+  ```sql
+  DELIMITER $$
+  CREATE PROCEDURE revenueByYear(IN year INT)
+  BEGIN
+    DECLARE revenue BIGINT;
+      SELECT SUM(amount) INTO revenue
+      FROM invoice
+      WHERE year = YEAR(created_date);
+
+      INSERT INTO revenue_report(amount, year)
+      VALUES (revenue, year);
+  END$$
+  DELIMITER ;
+
+  CALL revenueByYear(2024);
+  CALL revenueByYear(2023);
+  ```
+
+  ### Explanations
+
+  - Declares a variable revenue of type `BIGINT` to store the calculated total revenue.
+  - `SELECT` statement calculates the total revenue `(SUM(amount))` for the invoices where the YEAR of `created_date` matches the `year`. The result is stored into the revenue variable.
+  - After calculating revenue, this `INSERT` statement inserts a new row into the revenue_report table. It stores revenue in the amount column and year in the year column.
+
+<br>
+
+- On monthly there will be two parameters `INT`, year and monthly in that procedure.
+
+  Here is the implementations of monthly procedure,
+
+  ### Monthly
+
+  ```sql
+  DELIMITER $$
+  CREATE PROCEDURE revenueByMonth(IN month INT, year INT)
+  BEGIN
+    DECLARE revenue BIGINT;
+      SELECT SUM(amount) INTO revenue
+      FROM invoice
+      WHERE (month = MONTH(created_date)) AND (year = YEAR(created_date));
+
+    INSERT INTO revenue_report(amount, year, month)
+      VALUES (revenue, year, month);
+  END$$
+  DELIMITER ;
+
+  CALL revenueByMonth(5, 2024);
+  CALL revenueByMonth(6, 2024);
+  CALL revenueByMonth(11, 2023);
+  ```
+
+<br>
+
+- On daily there will be a date in `DATE` value as `in parameter` to take daily in the procedure.
+
+  Here is the implementations of daily procedure,
+
+  ### Daily
+
+  ```sql
+  DELIMITER $$
+  CREATE PROCEDURE revenueByDay(IN date DATE)
+  BEGIN
+    DECLARE revenue BIGINT;
+      SELECT SUM(amount) INTO revenue
+      FROM invoice
+      WHERE date = DATE(created_date);
+
+    INSERT INTO revenue_report(amount, year, month, day)
+      VALUES (revenue, YEAR(date), MONTH(date), DAY(date));
+  END$$
+  DELIMITER ;
+
+  CALL revenueByDay('2024-06-01');
+  CALL revenueByDay('2024-06-02');
+  CALL revenueByDay('2024-06-03');
+  CALL revenueByDay('2024-06-04');
+  ```
+
+After we call all the procedure from those three, the result will look like below,
+
+![Alt text](img/2.5.png)
