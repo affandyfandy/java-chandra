@@ -35,7 +35,7 @@ To configure multiple data sources in a Spring Boot application, we need to:
 
 - Create the second database. In this example the second database contains same table as the first database like in assignment 2 database.
 
-  ![Alt text](img/image.png)
+  ![Alt text](img/3.1.png)
 
 - Setup the configurations class for configures two data sources (primaryDataSource and secondaryDataSource) and two corresponding JdbcTemplate beans (primaryJdbcTemplate and secondaryJdbcTemplate) in [appConvifg](src/main/java/org/assignment1/assignment3/config/appConfig.java).
 
@@ -157,34 +157,34 @@ To configure multiple data sources in a Spring Boot application, we need to:
 
     - GET `/employees/primary` to get a list of all employees.
       <br>
-      ![Alt text](img/image-1.png)
+      ![Alt text](img/3.2.png)
 
     <br>
 
     - POST `/employees/primary/add` to create a new employee.
       <br>
-      ![Alt text](img/image-2.png)
-      ![Alt text](img/image-3.png)
+      ![Alt text](img/3.3.png)
+      ![Alt text](img/3.4.png)
 
     <br>
 
     - PUT `/employees/primary/{id}` to update an existing employee.
       <br>
-      ![Alt text](img/image-4.png)
-      ![Alt text](img/image-5.png)
+      ![Alt text](img/3.5.png)
+      ![Alt text](img/3.6.png)
 
     <br>
 
     - GET `/employees/primary/{id}` to get an employee by ID.
       <br>
-      ![Alt text](img/image-6.png)
+      ![Alt text](img/3.7.png)
 
     <br>
 
     - DELETE `/employees/primary/{id}` to delete an employee by ID.
       <br>
-      ![Alt text](img/image-7.png)
-      ![Alt text](img/image-8.png)
+      ![Alt text](img/3.8.png)
+      ![Alt text](img/3.9.png)
 
     <br>
 
@@ -192,34 +192,34 @@ To configure multiple data sources in a Spring Boot application, we need to:
 
     - GET `/employees/secondary` to get a list of all employees.
       <br>
-      ![Alt text](img/image-9.png)
+      ![Alt text](img/3.10.png)
 
     <br>
 
     - POST `/employees/secondary/add` to create a new employee.
       <br>
-      ![Alt text](img/image-10.png)
-      ![Alt text](img/image-11.png)
+      ![Alt text](img/3.11.png)
+      ![Alt text](img/3.12.png)
 
     <br>
 
     - PUT `/employees/secondary/{id}` to update an existing employee.
       <br>
-      ![Alt text](img/image-12.png)
-      ![Alt text](img/image-13.png)
+      ![Alt text](img/3.13.png)
+      ![Alt text](img/3.14.png)
 
     <br>
 
     - GET `/employees/secondary/{id}` to get an employee by ID.
       <br>
-      ![Alt text](img/image-14.png)
+      ![Alt text](img/3.15.png)
 
     <br>
 
     - DELETE `/employees/secondary/{id}` to delete an employee by ID.
       <br>
-      ![Alt text](img/image-15.png)
-      ![Alt text](img/image-16.png)
+      ![Alt text](img/3.16.png)
+      ![Alt text](img/3.17.png)
 
     <br>
 
@@ -343,6 +343,11 @@ public class employeeService {
   - Annotations: Same as the previous test.
   - Mock Setup: Configures secondaryEmployeeRepo.updateEmployee(emp) to return 1.
   - Assertions: Verifies that the method returns 1.
+
+    <br>
+    
+    Here is the result test,
+    ![img.png](img/3.18.png)
 
 # Research Lombok and add to project
 
