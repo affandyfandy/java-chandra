@@ -15,20 +15,21 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
     private String email;
 
-//    // Constructor injection with @Qualifier
-//    private final EmailService emailServiceConstructor;
-//
-//    @Autowired
-//    public EmployeeService(@Qualifier("emailService") EmailService emailServiceConstructor) {
-//        this.emailServiceConstructor = emailServiceConstructor;
-//    }
-//
-//    // Field injection with @Qualifier
-//    @Autowired
-//    @Qualifier("emailService")
-//    private EmailService emailServiceField;
-//
-//    // Setter injection with @Qualifier
+    // // Constructor injection with @Qualifier
+    // private final EmailService emailServiceConstructor;
+    //
+    // @Autowired
+    // public EmployeeService(@Qualifier("emailService") EmailService
+    // emailServiceConstructor) {
+    // this.emailServiceConstructor = emailServiceConstructor;
+    // }
+    //
+    // // Field injection with @Qualifier
+    // @Autowired
+    // @Qualifier("emailService")
+    // private EmailService emailServiceField;
+    //
+    // // Setter injection with @Qualifier
     private EmailService emailServiceSetter;
 
     @Autowired
@@ -37,4 +38,3 @@ public class EmployeeService {
         this.emailServiceSetter = emailServiceSetter;
     }
 }
-
