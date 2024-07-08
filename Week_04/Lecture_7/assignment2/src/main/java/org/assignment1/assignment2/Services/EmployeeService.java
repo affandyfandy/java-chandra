@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Setter
@@ -17,17 +16,16 @@ public class EmployeeService {
     // Constructor injection with @Qualifier
     private final EmailService emailServiceConstructor;
 
-    @Autowired
     public EmployeeService(@Qualifier("emailService") EmailService emailServiceConstructor) {
         this.emailServiceConstructor = emailServiceConstructor;
     }
 
-    //Field injection with @Qualifier
+    // Field injection with @Qualifier
     @Autowired
     @Qualifier("emailService")
     private EmailService emailServiceField;
 
-    //Setter injection with @Qualifier
+    // Setter injection with @Qualifier
     private EmailService emailServiceSetter;
 
     @Autowired

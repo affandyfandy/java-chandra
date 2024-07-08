@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 @Setter
 @Getter
 @Data
-public class employee {
+public class Employee {
 
     @Id
     private int id;
@@ -16,13 +16,13 @@ public class employee {
     private int age;
     private String email;
 
-    public employee(int id, String name, int age, String email) {
+    public Employee(int id, String name, int age, String email) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
     }
 
-    public employee() {
+    public Employee() {
     }
 }

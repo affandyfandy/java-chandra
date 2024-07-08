@@ -1,31 +1,31 @@
 package org.assignment1.assignment2.service;
 
-import org.assignment1.assignment2.model.employee;
-import org.assignment1.assignment2.repository.employeeRepository;
+import org.assignment1.assignment2.model.Employee;
+import org.assignment1.assignment2.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class employeeService {
+public class EmployeeService {
 
     @Autowired
-    private employeeRepository employeeRepo;
+    private EmployeeRepository employeeRepo;
 
-    public List<employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         return employeeRepo.getAllEmployees();
     }
 
-    public employee getEmployeeById(int id) {
+    public Employee getEmployeeById(int id) {
         return employeeRepo.getEmployeeById(id);
     }
 
-    public int addEmployee(employee employee) {
+    public int addEmployee(Employee employee) {
         return employeeRepo.addEmployee(employee);
     }
 
-    public int updateEmployee(employee employee) {
+    public int updateEmployee(Employee employee) {
         return employeeRepo.updateEmployee(employee);
     }
 

@@ -343,11 +343,7 @@ public class employeeService {
   - Annotations: Same as the previous test.
   - Mock Setup: Configures secondaryEmployeeRepo.updateEmployee(emp) to return 1.
   - Assertions: Verifies that the method returns 1.
-
-    <br>
-    
-    Here is the result test,
-    ![img.png](img/3.18.png)
+    ![Alt text](img/3.18.png)
 
 # Research Lombok and add to project
 

@@ -1,8 +1,8 @@
 package org.assignment1.assignment3.service;
 
-import org.assignment1.assignment3.model.employee;
-import org.assignment1.assignment3.repository.primaryEmployeeRepository;
-import org.assignment1.assignment3.repository.secondaryEmployeeRepository;
+import org.assignment1.assignment3.model.Employee;
+import org.assignment1.assignment3.repository.PrimaryEmployeeRepository;
+import org.assignment1.assignment3.repository.SecondaryEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,30 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
-public class employeeService {
+public class EmployeeService {
 
     @Autowired
-    private primaryEmployeeRepository primaryEmployeeRepo;
+    private PrimaryEmployeeRepository primaryEmployeeRepo;
 
     @Autowired
-    private secondaryEmployeeRepository secondaryEmployeeRepo;
+    private SecondaryEmployeeRepository secondaryEmployeeRepo;
 
-    public List<employee> getAllEmployeesFromPrimary() {
+    public List<Employee> getAllEmployeesFromPrimary() {
         return primaryEmployeeRepo.getAllEmployees();
     }
 
-    public employee getEmployeeByIdFromPrimary(int id) {
+    public Employee getEmployeeByIdFromPrimary(int id) {
         return primaryEmployeeRepo.getEmployeeById(id);
     }
 
     @Transactional("primaryTransactionManager")
-    public int addEmployeeToPrimary(employee employee) {
+    public int addEmployeeToPrimary(Employee employee) {
         return primaryEmployeeRepo.addEmployee(employee);
     }
 
     @Transactional("primaryTransactionManager")
-    public int updateEmployeeFromPrimary(employee employee) {
+    public int updateEmployeeFromPrimary(Employee employee) {
         return primaryEmployeeRepo.updateEmployee(employee);
     }
 
@@ -42,21 +41,21 @@ public class employeeService {
     }
 
     // Methods for secondary data source
-    public List<employee> getAllEmployeesFromSecondary() {
+    public List<Employee> getAllEmployeesFromSecondary() {
         return secondaryEmployeeRepo.getAllEmployees();
     }
 
-    public employee getEmployeeByIdFromSecondary(int id) {
+    public Employee getEmployeeByIdFromSecondary(int id) {
         return secondaryEmployeeRepo.getEmployeeById(id);
     }
 
     @Transactional("secondaryTransactionManager")
-    public int addEmployeeToSecondary(employee employee) {
+    public int addEmployeeToSecondary(Employee employee) {
         return secondaryEmployeeRepo.addEmployee(employee);
     }
 
     @Transactional("secondaryTransactionManager")
-    public int updateEmployeeInSecondary(employee employee) {
+    public int updateEmployeeInSecondary(Employee employee) {
         return secondaryEmployeeRepo.updateEmployee(employee);
     }
 

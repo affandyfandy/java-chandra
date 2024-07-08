@@ -1,8 +1,8 @@
 package org.assignment1.assignment3;
 
-import org.assignment1.assignment3.model.employee;
-import org.assignment1.assignment3.repository.primaryEmployeeRepository;
-import org.assignment1.assignment3.repository.secondaryEmployeeRepository;
+import org.assignment1.assignment3.model.Employee;
+import org.assignment1.assignment3.repository.PrimaryEmployeeRepository;
+import org.assignment1.assignment3.repository.SecondaryEmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.annotation.Rollback;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.transaction.annotation.Transactional;
-import org.assignment1.assignment3.service.employeeService;
+import org.assignment1.assignment3.service.EmployeeService;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,13 +22,13 @@ import static org.mockito.Mockito.when;
 public class EmployeeServiceTest {
 
     @InjectMocks
-    private employeeService employeeService;
+    private EmployeeService employeeService;
 
     @Mock
-    private primaryEmployeeRepository primaryEmployeeRepo;
+    private PrimaryEmployeeRepository primaryEmployeeRepo;
 
     @Mock
-    private secondaryEmployeeRepository secondaryEmployeeRepo;
+    private SecondaryEmployeeRepository secondaryEmployeeRepo;
 
     @BeforeEach
     public void setUp() {
@@ -37,12 +37,12 @@ public class EmployeeServiceTest {
 
     @Test
     public void testGetAllEmployeesFromPrimary() {
-        employee emp1 = new employee(1, "John Doe", 50, "john.doe@example.com");
-        employee emp2 = new employee(2, "Jane Doe", 50, "jane.doe@example.com");
+        Employee emp1 = new Employee(1, "John Doe", 50, "john.doe@example.com");
+        Employee emp2 = new Employee(2, "Jane Doe", 50, "jane.doe@example.com");
 
         when(primaryEmployeeRepo.getAllEmployees()).thenReturn(Arrays.asList(emp1, emp2));
 
-        List<employee> employees = employeeService.getAllEmployeesFromPrimary();
+        List<Employee> employees = employeeService.getAllEmployeesFromPrimary();
 
         assertNotNull(employees);
         assertEquals(2, employees.size());
@@ -52,11 +52,11 @@ public class EmployeeServiceTest {
 
     @Test
     public void testGetEmployeeByIdFromPrimary() {
-        employee emp = new employee(1, "John Doe", 50, "john.doe@example.com");
+        Employee emp = new Employee(1, "John Doe", 50, "john.doe@example.com");
 
         when(primaryEmployeeRepo.getEmployeeById(1)).thenReturn(emp);
 
-        employee result = employeeService.getEmployeeByIdFromPrimary(1);
+        Employee result = employeeService.getEmployeeByIdFromPrimary(1);
 
         assertNotNull(result);
         assertEquals("John Doe", result.getName());
@@ -66,7 +66,7 @@ public class EmployeeServiceTest {
     @Transactional("primaryTransactionManager")
     @Rollback(true)
     public void testAddEmployeeToPrimary() {
-        employee emp = new employee(1, "John Doe", 50, "john.doe@example.com");
+        Employee emp = new Employee(1, "John Doe", 50, "john.doe@example.com");
 
         when(primaryEmployeeRepo.addEmployee(emp)).thenReturn(1);
 
@@ -79,7 +79,7 @@ public class EmployeeServiceTest {
     @Transactional("primaryTransactionManager")
     @Rollback(true)
     public void testUpdateEmployeeFromPrimary() {
-        employee emp = new employee(1, "John Doe", 50, "john.doe@example.com");
+        Employee emp = new Employee(1, "John Doe", 50, "john.doe@example.com");
 
         when(primaryEmployeeRepo.updateEmployee(emp)).thenReturn(1);
 
@@ -101,12 +101,12 @@ public class EmployeeServiceTest {
 
     @Test
     public void testGetAllEmployeesFromSecondary() {
-        employee emp1 = new employee(1, "Alice Smith", 50, "alice.smith@example.com");
-        employee emp2 = new employee(2, "Bob Brown", 50, "bob.brown@example.com");
+        Employee emp1 = new Employee(1, "Alice Smith", 50, "alice.smith@example.com");
+        Employee emp2 = new Employee(2, "Bob Brown", 50, "bob.brown@example.com");
 
         when(secondaryEmployeeRepo.getAllEmployees()).thenReturn(Arrays.asList(emp1, emp2));
 
-        List<employee> employees = employeeService.getAllEmployeesFromSecondary();
+        List<Employee> employees = employeeService.getAllEmployeesFromSecondary();
 
         assertNotNull(employees);
         assertEquals(2, employees.size());
@@ -116,11 +116,11 @@ public class EmployeeServiceTest {
 
     @Test
     public void testGetEmployeeByIdFromSecondary() {
-        employee emp = new employee(1, "Alice Smith", 50, "alice.smith@example.com");
+        Employee emp = new Employee(1, "Alice Smith", 50, "alice.smith@example.com");
 
         when(secondaryEmployeeRepo.getEmployeeById(1)).thenReturn(emp);
 
-        employee result = employeeService.getEmployeeByIdFromSecondary(1);
+        Employee result = employeeService.getEmployeeByIdFromSecondary(1);
 
         assertNotNull(result);
         assertEquals("Alice Smith", result.getName());
@@ -130,7 +130,7 @@ public class EmployeeServiceTest {
     @Transactional("secondaryTransactionManager")
     @Rollback(true)
     public void testAddEmployeeToSecondary() {
-        employee emp = new employee(1, "Alice Smith", 50, "alice.smith@example.com");
+        Employee emp = new Employee(1, "Alice Smith", 50, "alice.smith@example.com");
 
         when(secondaryEmployeeRepo.addEmployee(emp)).thenReturn(1);
 
@@ -143,7 +143,7 @@ public class EmployeeServiceTest {
     @Transactional("secondaryTransactionManager")
     @Rollback(true)
     public void testUpdateEmployeeInSecondary() {
-        employee emp = new employee(1, "Alice Smith", 50, "alice.smith@example.com");
+        Employee emp = new Employee(1, "Alice Smith", 50, "alice.smith@example.com");
 
         when(secondaryEmployeeRepo.updateEmployee(emp)).thenReturn(1);
 

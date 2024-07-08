@@ -38,39 +38,74 @@ Here is the implementation for using JDBC to create a CRUD using RESTApi,
   }
   ```
 
-- After that create a repository class uses JdbcTemplate to perform CRUD operations on the Employee table. On JDBC template, the query need to be execute in sql query mode, so we need all the requirements on CRUD to perform this.
+- After that create a repository class uses JdbcTemplate to perform CRUD operations on the Employee table. On JDBC template, the query need to be execute in sql query mode, so we need all the requirements on CRUD to perform this. Also we add handle exception to catch specific exceptions such as EmptyResultDataAccessException for queries and other exceptions for update operations.
 
   ```java
   @Repository
-  public class employeeRepository {
+  public class EmployeeRepository {
+
       @Autowired
       private JdbcTemplate jdbcTemplate;
 
-      public List<employee> getAllEmployees() {
+      public List<Employee> getAllEmployees() {
           String sql = "select * from employee";
-          return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(employee.class));
+          try {
+              return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Employee.class));
+          } catch (DataAccessException e) {
+              // Handle the exception, log it, and return an appropriate response
+              e.printStackTrace();
+              return null; // or return an empty list, or throw a custom exception
+          }
       }
 
-      public employee getEmployeeById(int id) {
+      public Employee getEmployeeById(int id) {
           String sql = "select * from employee where id = ?";
-          return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(employee.class));
+          try {
+              return jdbcTemplate.queryForObject(sql, new Object[] { id }, new BeanPropertyRowMapper<>(Employee.class));
+          } catch (EmptyResultDataAccessException e) {
+              // Handle the case where no employee is found
+              e.printStackTrace();
+              return null; // or return an Optional<Employee> and return Optional.empty()
+          } catch (DataAccessException e) {
+              // Handle other potential DataAccessExceptions
+              e.printStackTrace();
+              return null;
+          }
       }
 
-      public int addEmployee(employee employee) {
+      public int addEmployee(Employee employee) {
           String sql = "INSERT INTO employee (name, age, email) VALUES (?, ?, ?)";
-          return jdbcTemplate.update(sql, employee.getName(), employee.getAge(), employee.getEmail());
+          try {
+              return jdbcTemplate.update(sql, employee.getName(), employee.getAge(), employee.getEmail());
+          } catch (DataAccessException e) {
+              // Handle the exception, log it, and return an appropriate response
+              e.printStackTrace();
+              return 0; // or throw a custom exception
+          }
       }
 
-      public int updateEmployee(employee employee) {
+      public int updateEmployee(Employee employee) {
           String sql = "UPDATE employee SET name = ?, age = ?, email = ? WHERE id = ?";
-          return jdbcTemplate.update(sql, employee.getName(), employee.getAge(), employee.getEmail(), employee.getId());
+          try {
+              return jdbcTemplate.update(sql, employee.getName(), employee.getAge(), employee.getEmail(),
+                      employee.getId());
+          } catch (DataAccessException e) {
+              // Handle the exception, log it, and return an appropriate response
+              e.printStackTrace();
+              return 0; // or throw a custom exception
+          }
       }
 
       public int deleteById(int id) {
           String sql = "DELETE FROM Employee WHERE id = ?";
-          return jdbcTemplate.update(sql, id);
+          try {
+              return jdbcTemplate.update(sql, id);
+          } catch (DataAccessException e) {
+              // Handle the exception, log it, and return an appropriate response
+              e.printStackTrace();
+              return 0; // or throw a custom exception
+          }
       }
-
   }
   ```
 
@@ -170,3 +205,8 @@ Here is the implementation for using JDBC to create a CRUD using RESTApi,
 
   - GET `/employees` to get a list of all employees.
     ![Alt text](img/2.2.png)
+
+    <br>
+
+  - GET `/employees/{empty}` to check the handles exceptions.
+    ![Alt text](img/2.10.png)

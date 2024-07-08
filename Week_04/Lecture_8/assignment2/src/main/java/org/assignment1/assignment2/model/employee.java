@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 @Setter
 @Getter
 @Data
-public class employee {
+public class Employee {
 
     @Id
     private int id;
