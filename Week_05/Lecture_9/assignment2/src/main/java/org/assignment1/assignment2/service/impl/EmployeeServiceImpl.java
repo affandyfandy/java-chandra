@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findById(int theId) {
+    public Employee findById(String theId) {
         return employeeRepository.findById(theId).orElseThrow();
     }
 
@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteById(int theId) {
+    public void deleteById(String theId) {
         employeeRepository.deleteById(theId);
     }
 

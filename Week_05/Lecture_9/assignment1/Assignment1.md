@@ -15,7 +15,7 @@
   <br>
 
 - Create a Database for Employee in `Mysql Workbench`
-  ![Alt text](img/1.3.png)
+  ![Alt text](1.3.png)
 
   <br>
 
@@ -60,7 +60,7 @@
 
 - Create [EmployeeRepository](src/main/java/org/assignment1/assignment1/repository/EmployeeRepository.java) for providing JPA Spring data
 
-  - extends JpaRepository<Employee, Integer>
+  - extends JpaRepository<Employee, String>
 
     - Purpose:
 
@@ -71,7 +71,7 @@
     <br>
 
     - Inheritance:
-      - By extending JpaRepository<Employee, Integer>, EmployeeRepository inherits several methods for working with Employee entities, such as saving, deleting, and querying. 2. List<Employee> findAllByOrderByLastNameAsc()
+      - By extending JpaRepository<Employee, String>, EmployeeRepository inherits several methods for working with Employee entities, such as saving, deleting, and querying. 2. List<Employee> findAllByOrderByLastNameAsc()
 
     <br>
 
@@ -96,10 +96,10 @@
 
     <br>
 
-  - Employee `findById(int id)`
+  - Employee `findById(String id)`
 
     - Purpose: Retrieves an employee by their unique identifier (id).
-    - Parameters: int id: The unique identifier of the employee to retrieve.
+    - Parameters: String id: The unique identifier of the employee to retrieve.
     - Return Type: Employee: The Employee entity with the specified id, or null if no employee with that id exists.
     - Usage: Used when displaying detailed information about a specific employee or when performing operations specific to an individual employee.
 
@@ -114,9 +114,9 @@
 
     <br>
 
-  - void `deleteById(int id)`
+  - void `deleteById(String id)`
     - Purpose: Deletes an employee from the database by their unique identifier (id).
-    - Parameters: int id: The unique identifier of the employee to delete.
+    - Parameters: String id: The unique identifier of the employee to delete.
     - Return Type: void: Typically, no return value is expected (void method).
     - Usage: Used when removing an employee from the system or database.
 
@@ -167,7 +167,7 @@
     - @PostMapping("/showFormForUpdate")
       - Purpose: Handles POST requests to /employees/showFormForUpdate.
       - Parameters:
-        - @RequestParam("employeeId") int id: Retrieves the employeeId from the request parameters.
+        - @RequestParam("employeeId") String id: Retrieves the employeeId from the request parameters.
         - Model theModel: Model to pass data to the view.
       - Process:
         - Retrieves the employee with the given id from the employeeService.
@@ -189,7 +189,7 @@
     - @PostMapping("/delete")
       - Purpose: Handles POST requests to /employees/delete.
       - Parameters:
-        - @RequestParam("employeeId") int id: Retrieves the employeeId from the request parameters.
+        - @RequestParam("employeeId") String id: Retrieves the employeeId from the request parameters.
       - Process:
         - Deletes the employee with the given id using the employeeService.
         - Redirects to /employees/list to display the updated list of employees.
@@ -218,8 +218,7 @@
   - Display form Update and after update
 
     ![Alt text](img/1.9.png) ![Alt text](img/1.10.png)
-
-  <br>
+    <br>
 
   - Result on database
 

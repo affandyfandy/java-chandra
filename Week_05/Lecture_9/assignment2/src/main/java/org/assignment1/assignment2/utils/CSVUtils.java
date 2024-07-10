@@ -24,7 +24,7 @@ public class CSVUtils {
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
                 Employee employee = new Employee();
-                employee.setId(Integer.parseInt(nextRecord[0].trim()));
+                employee.setId(nextRecord[0].trim());
                 employee.setFirstName(nextRecord[1].trim());
                 employee.setLastName(nextRecord[2].trim());
                 LocalDate dob = DateUtils.parseDate(nextRecord[3].trim().replaceAll("^\"|\"$", ""));
