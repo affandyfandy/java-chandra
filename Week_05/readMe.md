@@ -10,3 +10,5 @@
 <br>
 
 ## Lecture 8
+
+- [Assignment 1.md](Lecture_10/assignment1/Assignment1.md)
