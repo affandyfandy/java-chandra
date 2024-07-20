@@ -1,0 +1,80 @@
+Employee
+{
+    "birthDate": "1990-01-01",
+    "firstName": "John",
+    "lastName": "Doe",
+    "gender": "M",
+    "hireDate": "2023-01-01"
+}
+{
+    "birthDate": "1990-01-01",
+    "firstName": "Didi",
+    "lastName": "Doe",
+    "gender": "M",
+    "hireDate": "2023-02-01"
+}
+{
+    "birthDate": "1990-01-01",
+    "firstName": "Fans",
+    "lastName": "Doe",
+    "gender": "F",
+    "hireDate": "2023-03-01"
+}
+
+Department
+{
+    "deptNo" : "D01",
+    "deptName" : "Technology Developer"
+}
+
+Title
+{
+    "empNo": 1, 
+    "title": "Manager",
+    "fromDate": "2024-01-01",
+    "toDate": "2024-12-31"
+}
+
+
+Salary
+{
+    "empNo": 1,
+    "fromDate": "2024-01-01",
+    "salary": 50000,
+    "toDate": "2024-12-31"
+}
+
+
+update Salary
+{
+    "empNo": 1,
+    "fromDate": "2024-01-01",
+    "salary": 50000,
+    "toDate": "2024-12-31"
+}
+
+
+update Title
+{
+    "empNo": 1, 
+    "title": "Manager",
+    "fromDate": "2024-01-01",
+    "toDate": "2024-12-31"
+}
+
+
+Dept Employs
+{
+    "deptNo": "D01",
+    "empNo": 1,
+    "fromDate": "2024-01-01",
+    "toDate": "2024-12-31"
+}
+
+Dept Manager
+{
+    "deptNo": "D01",
+    "empNo": 1,
+    "fromDate": "2024-01-01",
+    "toDate": "2024-12-31"
+}
