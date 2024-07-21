@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fsoft</title>
+    <style>
+      body {
+        font-family: "Roboto";
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      p {
+        font-size: 14px;
+        white-space: nowrap;
+        text-wrap: nowrap;
+        flex-wrap: nowrap;
+        word-wrap: nowrap;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+        font-size: 12px;
+      }
+      th {
+        word-wrap: break-word;
+        white-space: normal;
+      }
+      .customer-info {
+        display: flex;
+        width: 100%;
+      }
+      h3,
+      h2 {
+        text-align: center;
+        color: #027ebc;
+      }
+      h4 {
+        margin: 0 0 10px 0;
+      }
+      .account-info {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        border: 2px solid black;
+      }
+      .account-info th,
+      .account-info td {
+        padding: 8px;
+        text-align: left;
+      }
+      .account-info td::before {
+        content: ":";
+        padding-right: 10px;
+      }
+      .message-details th {
+        background-color: #027ebc;
+        color: #fff;
+      }
+      hr {
+        border: none;
+        height: 2px;
+        background-color: black;
+      }
+      @media print {
+        .page-break {
+          page-break-before: always;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>FPT BE COURSE</h2>
+    <h3>Genarate pdf</h3>
+    <div>
+      <div class="customer-info">
+        <p>User: <span>Ryan Chandra</span></p>
+        <p style="width: 100%"></p>
+        <p>Date: <span th:text="${currentDate}">29/06/2024</span></p>
+      </div>
+    </div>
+    <hr />
+    <h4>Message summary</h4>
+    <table class="account-info">
+        <tbody>
+          <tr>
+            <th>Employee highest salary</th>
+            <td><span th:text="${highestSalaryEmployee != null ? highestSalaryEmployee.firstName + ' ' + highestSalaryEmployee.lastName : 'N/A'}">xxxxx</span></td>
+            <th>Max salary</th>
+            <td><span th:text="${highestSalaryEmployee != null ? highestSalaryEmployee.salary : 'N/A'}">2200</span></td>
+          </tr>
+          <tr>
+            <th>Employee lowest salary</th>
+            <td><span th:text="${lowestSalaryEmployee != null ? lowestSalaryEmployee.firstName + ' ' + lowestSalaryEmployee.lastName : 'N/A'}">vvvvv</span></td>
+            <th>Min salary</th>
+            <td><span th:text="${lowestSalaryEmployee != null ? lowestSalaryEmployee.salary : 'N/A'}">1000</span></td>
+          </tr>
+          <tr>
+            <th>Total record</th>
+            <td><span th:text="${recordCount}">10</span></td>
+            <th>Salary avg</th>
+            <td><span th:text="${averageSalary}">1500</span></td>
+          </tr>
+        </tbody>
+    </table>
+    <hr style="background-color: #999" />
+    <h4>Message details</h4>
+    <table class="message-details">
+        <thead class="table-dark">
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Address</th>
+            <th>Department</th>
+            <th>Salary</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempEmployee : ${employees}">
+            <td th:text="${tempEmployee.firstName} + ' ' + ${tempEmployee.lastName}" />
+            <td th:text="${tempEmployee.email}" />
+            <td th:text="${tempEmployee.dob}" />
+            <td th:text="${tempEmployee.address}"/>
+            <td th:text="${tempEmployee.department}" />
+            <td th:text="${tempEmployee.salary}" />
+        </tr>
+        </tbody>
+    </table>
+  </body>
+</html>
