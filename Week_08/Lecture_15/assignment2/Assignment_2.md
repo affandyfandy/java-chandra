@@ -9,6 +9,32 @@
 
 <br>
 
+## Filter in Java
+
+A `filter in Java`, particularly in the context of web applications using the Java Servlet API, is an object that performs filtering tasks on either the request to a resource (a servlet or static content), or on the response from a resource, or both.
+
+`How Filter Works?`
+Filters are configured to intercept requests and responses in a web application. They are chained together such that the output of one filter can be passed as the input to the next filter. Filters do not generate responses directly; they process the request and/or response and pass control to the next filter or resource in the chain.
+
+`Key Methods of the Filter Interface`
+
+1. `init(FilterConfig filterConfig):`
+
+   - This method is called by the web container to initialize the filter. It is called once when the filter is instantiated. You can use this method to set up any resources needed by the filter.
+
+<br>
+
+2. `doFilter`(ServletRequest request, ServletResponse response, FilterChain chain):
+
+   - This method is called for each request/response pair that the filter is configured to intercept. You can use this method to inspect and modify the request and response objects, and to pass control to the next filter in the chain using chain.doFilter(request, response).
+
+<br>
+
+3. `destroy():`
+   - This method is called by the web container to indicate to the filter that it is being taken out of service. You can use this method to clean up any resources held by the filter.
+
+<br>
+
 ## Spring Boot Project
 
 ```java
