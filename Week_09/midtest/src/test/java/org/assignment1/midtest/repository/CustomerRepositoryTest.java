@@ -94,7 +94,7 @@ class CustomerRepositoryTest {
     }
 
     @Test
-    public void CustomerRepository_updateCustomer_ReturnsUpdatedCustomers() {
+    void CustomerRepository_updateCustomer_ReturnsUpdatedCustomers() {
         // Act
         Optional<Customer> customerOpt = customerRepository.findById(customerId1);
 

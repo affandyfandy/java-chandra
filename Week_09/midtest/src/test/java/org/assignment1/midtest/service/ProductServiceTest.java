@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -158,6 +160,38 @@ class ProductServiceTest {
     }
 
     @Test
+    void ProductService_importProductsFromCsv_ShouldImportProducts() throws Exception {
+        // Arrange
+        String csvContent = "Product A,100,ACTIVE\nProduct B,150,INACTIVE";
+        MultipartFile file = new MockMultipartFile("file", "products.csv", "text/csv", csvContent.getBytes());
+
+        Product product1 = Product.builder()
+                .id(UUID.randomUUID())
+                .name("Product A")
+                .price(BigDecimal.valueOf(100))
+                .status(Status.ACTIVE)
+                .build();
+
+        Product product2 = Product.builder()
+                .id(UUID.randomUUID())
+                .name("Product B")
+                .price(BigDecimal.valueOf(150))
+                .status(Status.INACTIVE)
+                .build();
+
+        // Use argument matchers for stubbing
+        when(productMapper.toEntity(Mockito.any(ProductDTO.class))).thenReturn(product1, product2);
+
+        // Act
+        productService.importProductsFromCsv(file);
+
+        // Assertion
+        Mockito.verify(productRepository, Mockito.times(1)).save(product1);
+        Mockito.verify(productRepository, Mockito.times(1)).save(product2);
+    }
+
+
+    @Test
     void ProductService_searchProducts_ReturnProductPage() {
         // Arrange
         Pageable pageable = PageRequest.of(0, 10);
@@ -171,5 +205,78 @@ class ProductServiceTest {
 
         // Assertion
         Assertions.assertThat(result).isNotNull();
+    }
+
+    @Test
+    void ProductService_searchProducts_WithNameOnly_ReturnProductPage() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
+
+        when(productRepository.findByNameContainingIgnoreCase("Product", pageable)).thenReturn(productPage);
+        when(productMapper.toDTO(product)).thenReturn(productDTO);
+
+        // Act
+        Page<ProductDTO> result = productService.searchProducts("Product", null, pageable);
+
+        // Assertion
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getContent()).hasSize(1);
+        Assertions.assertThat(result.getContent().get(0).getName()).isEqualTo("Product A");
+    }
+
+    @Test
+    void ProductService_searchProducts_WithStatusOnly_ReturnProductPage() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
+
+        when(productRepository.findByStatus(Status.ACTIVE, pageable)).thenReturn(productPage);
+        when(productMapper.toDTO(product)).thenReturn(productDTO);
+
+        // Act
+        Page<ProductDTO> result = productService.searchProducts(null, Status.ACTIVE, pageable);
+
+        // Assertion
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getContent()).hasSize(1);
+        Assertions.assertThat(result.getContent().get(0).getStatus()).isEqualTo(Status.ACTIVE);
+    }
+
+    @Test
+    void ProductService_searchProducts_WithNameAndStatus_ReturnProductPage() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
+
+        when(productRepository.findByNameContainingIgnoreCaseAndStatus("Product", Status.ACTIVE, pageable)).thenReturn(productPage);
+        when(productMapper.toDTO(product)).thenReturn(productDTO);
+
+        // Act
+        Page<ProductDTO> result = productService.searchProducts("Product", Status.ACTIVE, pageable);
+
+        // Assertion
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getContent()).hasSize(1);
+        Assertions.assertThat(result.getContent().get(0).getName()).isEqualTo("Product A");
+        Assertions.assertThat(result.getContent().get(0).getStatus()).isEqualTo(Status.ACTIVE);
+    }
+
+    @Test
+    void ProductService_searchProducts_WithNoCriteria_ReturnProductPage() {
+        // Arrange
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Product> productPage = new PageImpl<>(Collections.singletonList(product));
+
+        when(productRepository.findAll(pageable)).thenReturn(productPage);
+        when(productMapper.toDTO(product)).thenReturn(productDTO);
+
+        // Act
+        Page<ProductDTO> result = productService.searchProducts(null, null, pageable);
+
+        // Assertion
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.getContent()).hasSize(1);
+        Assertions.assertThat(result.getContent().get(0).getName()).isEqualTo("Product A");
     }
 }
