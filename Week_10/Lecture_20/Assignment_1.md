@@ -11,6 +11,31 @@ The Discovery service in this project is implemented using **Netflix Eureka**, w
 1. **Eureka Server**: Acts as the service registry where all microservices register themselves.
 2. **Eureka Client**: The microservices (e.g., Product Service, Customer Service, Gateway) that register with the Eureka server and discover other services.
 
+`@EnableDiscoveryClient`
+The `@EnableDiscoveryClient` annotation is used in a Spring Boot application to enable service discovery. This annotation makes the application register itself with a discovery server (like Eureka, Consul, or Zookeeper) so that it can discover other services and be discovered by other services.
+
+Key Points:
+- Registration: The application will register itself with the discovery server, which allows other services to find it.
+- Service Discovery: The application can also discover other services registered with the discovery server.
+- Load Balancing: When using Spring Cloud with Ribbon, @EnableDiscoveryClient enables client-side load balancing by automatically integrating with the discovery service.
+
+In this project there is four service that use the `@EnableDiscoveryClient`,
+1. [Product Service](products)
+2. [Customer Service](customers)
+3. [Authentications Service](authentication)
+4. [Gateway Service](gateway)
+
+<br>
+
+`@EnableEurekaServer`
+The `@EnableEurekaServer` annotation is used to stand up a Eureka Server. Eureka Server is a service registry that provides the functionality to register microservices and allows them to discover each other. This is a critical part of a microservices architecture as it helps in managing service instances and routing.
+
+Key Points:
+- Service Registry: The application will function as a Eureka Server, which is the central registry for services in a Spring Cloud ecosystem.
+- Service Discovery: Other microservices use this server to register themselves and to discover other services.
+- High Availability: Eureka servers can be clustered together for high availability.
+
+
 <br>
 
 ## Eureka Configurations
