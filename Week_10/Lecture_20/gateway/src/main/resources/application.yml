@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: customers-service
+          uri: lb://customers-service
+          predicates:
+            - Path=/customers/**
+          filters:
+            - name: ApiKeyFilter
+              args:
+                apiKeyHeaderName: api-key
+                authServiceUrl: http://localhost:8083/auth-api-key/validate
+        - id: products-service
+          uri: lb://customers-service
+          predicates:
+            - Path=/products/**
+          filters:
+            - name: ApiKeyFilter
+              args:
+                apiKeyHeaderName: api-key
+                authServiceUrl: http://localhost:8083/auth-api-key/validate
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
