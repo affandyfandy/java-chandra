@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Ryan Chandra",
+      "email": "babab1@gmail.com",
+      "password": "babab@123"
+    },
+    {
+      "id": "2",
+      "fullname": "Risa Lika",
+      "email": "risalika1@gmail.com",
+      "password": "risalika@123"
+    },
+    {
+      "id": "17d6",
+      "email": "ryan.chandra.hadi@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "Ryan Chandra Hadi"
+    },
+    {
+      "id": "3fdc",
+      "email": "ryan.chandra.hadi@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "Ryan Chandra Hadi"
+    },
+    {
+      "id": "af32",
+      "email": "ryan.chandra.hadi@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "Ryan Chandra Hadi"
+    },
+    {
+      "id": "6b9c",
+      "email": "ryanchandra@student.telkomuniversity.ac.id",
+      "password": "r3wr3wr",
+      "fullname": "Ryan Chandra Hadi"
+    },
+    {
+      "id": "47f2",
+      "email": "zainalprahari@gmail.com",
+      "password": "dddddd",
+      "fullname": "dwaddddd"
+    }
+  ]
+}

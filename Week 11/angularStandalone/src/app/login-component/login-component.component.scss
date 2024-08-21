@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.card-title {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.btn-primary {
+  &:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+}
