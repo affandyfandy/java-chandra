@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
-import { LoginComponentComponent } from '../app/login-component/login-component.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from "./header/header.component";
+
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     RouterOutlet,
     RouterLink,
-    LoginComponentComponent,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    HeaderComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

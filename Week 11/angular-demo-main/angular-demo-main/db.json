@@ -2,13 +2,8 @@
   "customers": [
     {
       "id": "1",
-      "firstname": "Rose",
+      "firstname": "chan",
       "lastname": "Lee dwadwad"
-    },
-    {
-      "id": "2",
-      "firstname": "Aley",
-      "lastname": "ZZumapel"
     }
   ]
 }

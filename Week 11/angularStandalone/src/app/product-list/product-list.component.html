@@ -1,0 +1,11 @@
+<ag-grid-angular
+  style="width: 100%; height: 550px;"
+  class="ag-theme-alpine"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [pagination]="true"
+  [paginationPageSizeSelector]="[10, 20, 50, 100]"
+  (rowClicked)="onRowClicked($event)">
+
+</ag-grid-angular>
+
