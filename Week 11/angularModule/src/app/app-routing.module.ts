@@ -4,7 +4,7 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { SignupComponentComponent } from './signup-component/signup-component.component'
 import { UsersComponentComponent } from './users-component/users-component.component'
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'login', component: LoginComponentComponent },
   { path: 'signup', component: SignupComponentComponent},
   { path: 'view-users', component: UsersComponentComponent}
