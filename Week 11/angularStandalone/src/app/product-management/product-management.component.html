@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card p-4 shadow-sm">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="p-4 bg-light border rounded">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input id="name" formControlName="name" type="text" class="form-control" placeholder="Enter product name">
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input id="price" formControlName="price" type="number" class="form-control" placeholder="Enter product price">
+          </div>
+
+          <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" formControlName="status" class="form-select">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100" [disabled]="productForm.invalid">
+            {{ editingProduct ? 'Update Product' : 'Add Product' }}
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <app-product-list
+        (productSelected)="onEditProduct($event)"
+        (refreshList)="refreshProductList()"
+      ></app-product-list>
+    </div>
+  </div>
+</div>
+

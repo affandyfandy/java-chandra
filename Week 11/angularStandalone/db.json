@@ -1,0 +1,234 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Ryan Chandra",
+      "email": "babab1@gmail.com",
+      "password": "babab@123"
+    },
+    {
+      "id": "2",
+      "fullname": "Risa Lika",
+      "email": "risalika1@gmail.com",
+      "password": "risalika@123"
+    },
+    {
+      "id": "17d6",
+      "email": "wdawd2wd@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "RdAWDChdawddfawdei"
+    },
+    {
+      "id": "3fdc",
+      "email": "frsdgsrhsrgh@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "Ryqwe1wtra Hadi"
+    },
+    {
+      "id": "af32",
+      "email": "vdsfvrfwf@gmail.com",
+      "password": "wdadawdawd",
+      "fullname": "Rydawddandra Hadi"
+    },
+    {
+      "id": "6b9c",
+      "email": "opikoijp@gmail.com",
+      "password": "r3wr3wr",
+      "fullname": "Ryan awdadawdawdHadi"
+    },
+    {
+      "id": "47f2",
+      "email": "DAWDGGHTEH@gmail.com",
+      "password": "dddddd",
+      "fullname": "dwaddddd"
+    }
+  ],
+  "products": [
+    {
+      "name": "Galaxy S22 Ultra",
+      "price": 799,
+      "status": "Active",
+      "id": "1"
+    },
+    {
+      "name": "iPhone 13",
+      "price": 999,
+      "status": "Active",
+      "id": "2"
+    },
+    {
+      "name": "Pixel 6",
+      "price": 699,
+      "status": "Active",
+      "id": "3"
+    },
+    {
+      "name": "OnePlus 9 Pro",
+      "price": 899,
+      "status": "Active",
+      "id": "4"
+    },
+    {
+      "name": "Xperia 5 III",
+      "price": 849,
+      "status": "Inactive",
+      "id": "5"
+    },
+    {
+      "name": "Mi 11 Ultra",
+      "price": 749,
+      "status": "Active",
+      "id": "6"
+    },
+    {
+      "name": "Galaxy Note 20",
+      "price": 949,
+      "status": "Inactive",
+      "id": "7"
+    },
+    {
+      "name": "iPhone 12",
+      "price": 799,
+      "status": "Active",
+      "id": "8"
+    },
+    {
+      "name": "Pixel 5a",
+      "price": 499,
+      "status": "Inactive",
+      "id": "9"
+    },
+    {
+      "name": "OnePlus 8T",
+      "price": 649,
+      "status": "Active",
+      "id": "10"
+    },
+    {
+      "name": "Xperia 1 II",
+      "price": 949,
+      "status": "Active",
+      "id": "11"
+    },
+    {
+      "name": "Mi 10 Pro",
+      "price": 599,
+      "status": "Inactive",
+      "id": "12"
+    },
+    {
+      "name": "Galaxy S20 FE",
+      "price": 699,
+      "status": "Active",
+      "id": "13"
+    },
+    {
+      "name": "iPhone 11",
+      "price": 699,
+      "status": "Inactive",
+      "id": "14"
+    },
+    {
+      "name": "Pixel 4 XL",
+      "price": 599,
+      "status": "Inactive",
+      "id": "15"
+    },
+    {
+      "name": "OnePlus 7 Pro",
+      "price": 549,
+      "status": "Inactive",
+      "id": "16"
+    },
+    {
+      "name": "Xperia XZ3",
+      "price": 499,
+      "status": "Inactive",
+      "id": "17"
+    },
+    {
+      "name": "Mi Mix 3",
+      "price": 479,
+      "status": "Inactive",
+      "id": "18"
+    },
+    {
+      "name": "Galaxy A52",
+      "price": 399,
+      "status": "Active",
+      "id": "19"
+    },
+    {
+      "name": "iPhone SE",
+      "price": 399,
+      "status": "Active",
+      "id": "20"
+    },
+    {
+      "name": "Pixel 4a",
+      "price": 349,
+      "status": "Inactive",
+      "id": "21"
+    },
+    {
+      "name": "OnePlus Nord",
+      "price": 379,
+      "status": "Active",
+      "id": "22"
+    },
+    {
+      "name": "Xperia L4",
+      "price": 299,
+      "status": "Inactive",
+      "id": "23"
+    },
+    {
+      "name": "Mi A3",
+      "price": 299,
+      "status": "Inactive",
+      "id": "24"
+    },
+    {
+      "name": "Galaxy A32",
+      "price": 299,
+      "status": "Active",
+      "id": "25"
+    },
+    {
+      "name": "iPhone XR",
+      "price": 499,
+      "status": "Inactive",
+      "id": "26"
+    },
+    {
+      "name": "Pixel 3 XL",
+      "price": 399,
+      "status": "Inactive",
+      "id": "27"
+    },
+    {
+      "name": "OnePlus 6T",
+      "price": 449,
+      "status": "Inactive",
+      "id": "28"
+    },
+    {
+      "name": "Xperia XZ2",
+      "price": 399,
+      "status": "Inactive",
+      "id": "29"
+    },
+    {
+      "name": "Mi 9",
+      "price": 429,
+      "status": "Inactive",
+      "id": "30"
+    },
+    {
+      "id": "a7be",
+      "name": "Xperia L100",
+      "price": 599,
+      "status": "Active"
+    }
+  ]
+}

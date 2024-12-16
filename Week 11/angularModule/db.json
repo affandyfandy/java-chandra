@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Ryan Chandra",
+      "email": "babab1@gmail.com",
+      "password": "babab@123"
+    },
+    {
+      "id": "2",
+      "fullname": "Risa Lika",
+      "email": "risalika1@gmail.com",
+      "password": "risalika@123"
+    },
+    {
+      "id": "aa88",
+      "email": "chandra@gmail.com",
+      "password": "chandra123",
+      "fullname": "chandraaa"
+    }
+  ]
+}
